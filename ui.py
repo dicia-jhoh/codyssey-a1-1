@@ -47,7 +47,12 @@ def show_list(prompts, title="전체 목록"):
         return
     for number, prompt in enumerate(prompts, start=1):
         star = "★" if prompt["favorite"] else "☆"
-        print(f"  {number:>2}. {star} [{prompt['category']}] {prompt['title']}")
+        # 내용 첫 줄을 미리보기로 붙인다 — 제목만으로는 어떤 프롬프트인지 구분이 안 될 때가 있다.
+        preview = prompt["content"].strip().splitlines()[0] if prompt["content"].strip() else ""
+        if len(preview) > 28:
+            preview = preview[:28] + "…"
+        tail = f"  — {preview}" if preview else ""
+        print(f"  {number:>2}. {star} [{prompt['category']}] {prompt['title']}{tail}")
 
 
 def show_detail(prompt):
