@@ -110,12 +110,19 @@ def toggle_favorite(prompts):
 
 
 def show_favorites(prompts):
-    """즐겨찾기한 프롬프트만 모아서 보여준다."""
+    """즐겨찾기한 프롬프트만 모아서 보여준다. 카테고리별로 묶어 출력한다."""
     picked = [p for p in prompts if p["favorite"]]
     if not picked:
         ui.notice("즐겨찾기한 프롬프트가 없습니다. 메뉴 6번에서 추가하세요.")
         return
-    ui.show_list(picked, title="즐겨찾기")
+    print(f"\n[즐겨찾기] 총 {len(picked)}개")
+    for category in storage.CATEGORIES:
+        group = [p for p in picked if p["category"] == category]
+        if not group:
+            continue  # 즐겨찾기가 없는 카테고리는 건너뛴다
+        print(f"  · {category} ({len(group)}개)")
+        for prompt in group:
+            print(f"      ★ {prompt['title']}")
 
 
 def edit_prompt(prompts):
