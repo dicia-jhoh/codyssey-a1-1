@@ -165,7 +165,36 @@ actions = {1: features.add_prompt, 2: features.show_all, ...}
 
 ## 개발 환경
 
-이 프로그램을 만들 때 갖춘 환경입니다.
+**실행 결과 원문**(터미널에서 직접 실행한 출력 그대로):
+
+```
+$ python --version
+Python 3.14.4                    ← 요구 3.10 이상 충족
+
+$ python -c "print('Hello')"
+Hello                            ← 첫 실행 확인
+
+$ git --version
+git version 2.53.0
+
+$ git config user.name
+dicia-jhoh
+$ git config user.email
+dicia-jhoh@users.noreply.github.com
+
+$ git config --global init.defaultBranch
+main                             ← 기본 브랜치 main 설정 확인
+
+$ git branch --show-current
+main
+```
+
+전문은 [`docs/env-and-git-log.md`](docs/env-and-git-log.md) 에 있습니다(환경 확인 + clone 실습 + 커밋 그래프).
+스크린샷 대신 터미널 출력을 남긴 이유는 **복사·검색·대조가 되기 때문**입니다.
+
+**GitHub 저장소 URL**: <https://github.com/dicia-jhoh/codyssey-a1-1>
+
+아래는 항목별 확인 표입니다.
 
 | 항목 | 확인 방법 | 결과 |
 |---|---|---|
@@ -218,18 +247,33 @@ actions = {1: features.add_prompt, 2: features.show_all, ...}
 
 ### 커밋 이력 (10개 이상, 기능 단위)
 
+`git log --oneline --graph --decorate --all` 실행 결과 원문:
+
 ```
-*   merge: feature/favorites — 즐겨찾기 카테고리 묶음 + 목록 미리보기
+* 955b05b (HEAD -> main, origin/main) docs: 심층 인터뷰 대응 9문
+* f993c33 docs: 기능별 동작 명세표 + Git 개념·명령 설명 + init 실습 기록
+* ff293c3 docs: README 저작 — 앞 미션 계승·기능·구조 판단근거·Git 기록
+* cb4d1d3 docs: 전 기능 실행 결과 로그 채취(실측 292줄)
+*   5bc19cf merge: feature/favorites — 즐겨찾기 카테고리 묶음 + 목록 미리보기
 |\
-| * feat(ui): 목록에 내용 첫 줄 미리보기 추가
-| * feat(favorites): 즐겨찾기 목록을 카테고리별로 묶어 출력
+| * 94963ff (feature/favorites) feat(ui): 목록에 내용 첫 줄 미리보기 추가
+| * 43a110b feat(favorites): 즐겨찾기 목록을 카테고리별로 묶어 출력
 |/
-* feat(app): 메인 루프 + 기능 12종
-* feat(ui): 화면 출력 계층 — 메뉴·목록·상세·안내 메시지
-* feat(storage): 데이터 계층 — 프롬프트 생성·시드 로드·JSON 저장/불러오기
-* feat(data): 이전 미션 프롬프트 7개를 기본 시드로 등록
-* chore: .gitignore 추가
-* docs: 전 기능 실행 결과 로그 채취
+* 312b945 feat(app): 메인 루프 + 기능 12종 — 추가·목록·카테고리·검색·상세·즐겨찾기
+* dc9beb1 feat(ui): 화면 출력 계층 — 메뉴·목록·상세·안내 메시지
+* 2a1df22 feat(storage): 데이터 계층 — 프롬프트 생성·시드 로드·JSON 저장/불러오기
+* e29fae8 feat(data): 이전 미션 프롬프트 7개를 기본 시드로 등록
+* eb685dc chore: .gitignore 추가 — 캐시·사용자 데이터·편집기 설정 제외
+```
+
+`*` 하나가 커밋 하나, `|\` 부분이 브랜치가 갈라졌다 병합된 자리입니다.
+작성자 정보가 실제로 커밋에 박혔는지도 확인했습니다:
+
+```
+$ git log --format='%h %an <%ae> %ad %s' --date=short | head -3
+955b05b dicia-jhoh <dicia-jhoh@users.noreply.github.com> 2026-07-28 docs: 심층 인터뷰 대응 9문
+f993c33 dicia-jhoh <dicia-jhoh@users.noreply.github.com> 2026-07-28 docs: 기능별 동작 명세표
+ff293c3 dicia-jhoh <dicia-jhoh@users.noreply.github.com> 2026-07-28 docs: README 저작
 ```
 
 **커밋을 나눈 기준**: "한 커밋 = 한 가지 변경 의도". 그래서 데이터 계층·화면 계층·기능 계층이
@@ -258,7 +302,7 @@ git merge --no-ff feature/favorites  # 병합 기록을 남기며 합치기
 | `push` | 로컬 커밋을 GitHub 에 올릴 때 |
 | `pull` | 원격 변경을 받아올 때(`git pull --rebase origin main`) |
 | `checkout` | `feature/favorites` 브랜치 분기·복귀 |
-| `clone` | 공개 샘플 저장소(`octocat/Hello-World`)를 내려받아 폴더 구조·`git log` 확인 후 삭제 |
+| `clone` | 공개 샘플 저장소를 내려받아 확인 후 삭제 — **실행 결과 원문**:<br>`$ git clone https://github.com/octocat/Hello-World.git` → `Cloning into 'clone-demo'...`<br>`$ ls clone-demo/` → `README`<br>`$ git -C clone-demo log --oneline \| head -3` → `7fd1a60 Merge pull request #6…` / `7629413 New line at end of file.` / `553c207 first commit`<br>([`docs/env-and-git-log.md`](docs/env-and-git-log.md) §2) |
 | `merge` | `feature/favorites` → `main` 병합 |
 
 ---
@@ -324,8 +368,20 @@ git merge --no-ff feature/favorites  # 병합 기록을 남기며 합치기
   > exports/ 폴더에 4개 파일을 만들었습니다.
 ```
 
-> 개발 환경 화면 캡처(VSCode·Python 버전·Git 설정)와 `git log --oneline --graph` 캡처는
-> **실제 연동 시 이 자리**에 이미지로 교체합니다. 현재는 위 표와 커밋 이력 텍스트로 같은 내용을 확인할 수 있습니다.
+### 제출 산출물 위치
+
+| 요구 산출물 | 이 저장소에서 |
+|---|---|
+| GitHub 저장소 URL | <https://github.com/dicia-jhoh/codyssey-a1-1> |
+| 개발 환경 설정 확인(Python 버전·Git 설정) | [`docs/env-and-git-log.md`](docs/env-and-git-log.md) §1 — 터미널 출력 원문 |
+| 프로그램 실행 결과(메뉴·추가·목록·검색) | [`docs/run-log.md`](docs/run-log.md) — 전 기능 292줄 실측 |
+| `git log --oneline --graph` 결과 | [`docs/env-and-git-log.md`](docs/env-and-git-log.md) §3 + 위 "커밋 이력" 절 |
+| `git init` 실습 | [`docs/git-init-practice.md`](docs/git-init-practice.md) |
+| README | 이 파일 (`README.md`) |
+
+> VSCode 화면 캡처(확장 설치·GitHub 로그인 화면)는 **실제 연동 시 이 자리**에 이미지로 교체합니다.
+> 터미널로 확인 가능한 항목(Python·Git 버전, 사용자 정보, 브랜치, 커밋 그래프, clone 결과)은
+> 위 문서들에 **실행 출력 원문**으로 남겼습니다 — 캡처 이미지보다 대조가 쉽습니다.
 
 ---
 
