@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 실행 중 생성되는 사용자 데이터(보너스 영속화) — 기본 시드만 커밋한다
+data/prompts_user.json
+exports/
+
+# 편집기·OS
+.vscode/
+.idea/
+.DS_Store
