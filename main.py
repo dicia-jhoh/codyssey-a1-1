@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import features
+import search_ext
 import storage
 import ui
 
@@ -35,7 +36,7 @@ def run():
         1: features.add_prompt,
         2: features.show_all,
         3: features.show_by_category,
-        4: features.search_prompt,
+        4: search_ext.search_prompt,
         5: features.show_one_detail,
         6: features.toggle_favorite,
         7: features.show_favorites,
