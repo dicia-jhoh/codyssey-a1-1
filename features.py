@@ -74,20 +74,6 @@ def show_by_category(prompts):
     ui.show_list(picked, title=f"카테고리 · {category}")
 
 
-def search_prompt(prompts):
-    """키워드로 제목·내용을 검색한다(대소문자 구분 없음)."""
-    keyword = input("  검색어 > ").strip()
-    if not keyword:
-        ui.notice("검색어를 입력하세요.")
-        return
-    low = keyword.lower()
-    found = [p for p in prompts if low in p["title"].lower() or low in p["content"].lower()]
-    if not found:
-        ui.notice(f"'{keyword}' 가 들어간 프롬프트가 없습니다.")
-        return
-    ui.show_list(found, title=f"검색 · {keyword}")
-
-
 def show_one_detail(prompts):
     """번호를 고르면 그 프롬프트의 전체 내용을 보여준다. 볼 때마다 조회수가 1 오른다."""
     ui.show_list(prompts)
